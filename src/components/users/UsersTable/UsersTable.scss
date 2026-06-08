@@ -1,0 +1,508 @@
+@use '../../../styles/variables' as *;
+
+.users-table {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+
+  &__desktop {
+    display: block;
+  }
+
+  &__mobile-toolbar,
+  &__mobile-card-list {
+    display: none;
+  }
+
+  &__mobile-toolbar {
+    padding: 16px;
+    border-bottom: 1px solid rgba(33, 63, 125, 0.06);
+  }
+
+  &__mobile-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: 500;
+    color: $text-body;
+    background-color: $white;
+    border: 1px solid rgba(33, 63, 125, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+
+    &--active {
+      color: $primary;
+      border-color: $primary;
+    }
+  }
+
+  &__mobile-filter-badge {
+    width: 8px;
+    height: 8px;
+    background-color: $primary;
+    border-radius: 50%;
+  }
+
+  &__scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background:
+      linear-gradient(to right, #fff 30%, rgba(255, 255, 255, 0)),
+      linear-gradient(to left, #fff 30%, rgba(255, 255, 255, 0)),
+      radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, 0.08), transparent),
+      radial-gradient(
+        farthest-side at 100% 50%,
+        rgba(0, 0, 0, 0.08),
+        transparent
+      );
+    background-color: $white;
+    background-repeat: no-repeat;
+    background-attachment: local, local, scroll, scroll;
+    background-position: left, right, left, right;
+    background-size:
+      40px 100%,
+      40px 100%,
+      14px 100%,
+      14px 100%;
+    border-radius: $card-border-radius;
+  }
+
+  &__table {
+    width: 100%;
+    min-width: 980px;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  &__head {
+    border-bottom: 1px solid rgba(33, 63, 125, 0.06);
+  }
+
+  &__th {
+    padding: 16px 14px;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-align: left;
+    text-transform: uppercase;
+    color: $text-body;
+    white-space: nowrap;
+  }
+
+  &__th-content {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    padding: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: inherit;
+    vertical-align: middle;
+  }
+
+  &__header-filter-btn,
+  &__filter-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid rgba(57, 205, 204, 0.45);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+  }
+
+  &__header-filter-btn {
+    white-space: nowrap;
+  }
+
+  &__filter-btn {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    justify-content: center;
+  }
+
+  &__filter-icon {
+    flex-shrink: 0;
+    color: #545f7d;
+    opacity: 0.6;
+    transition:
+      color 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  &__filter-btn:hover &__filter-icon {
+    opacity: 1;
+  }
+
+  &__filter-btn--filtered &__filter-icon {
+    color: #39cdcc;
+  }
+
+  &__row {
+    background-image: linear-gradient(
+      rgba(33, 63, 125, 0.1),
+      rgba(33, 63, 125, 0.1)
+    );
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: calc(100% - 40px) 1px;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: rgba(33, 63, 125, 0.02);
+    }
+
+    &:last-child {
+      background-image: none;
+    }
+  }
+
+  &__cell {
+    position: relative;
+    overflow: hidden;
+    padding: 16px 14px;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: 400;
+    color: $text-body;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__cell[data-col='email'] {
+    min-width: 180px;
+    max-width: 220px;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  &__cell--actions {
+    overflow: visible;
+    padding-right: 12px;
+    padding-left: 8px;
+    text-align: right;
+  }
+
+  &__th:nth-child(1),
+  &__cell:nth-child(1) {
+    width: 140px;
+  }
+
+  &__th:nth-child(2),
+  &__cell:nth-child(2) {
+    width: 120px;
+  }
+
+  &__th:nth-child(3),
+  &__cell:nth-child(3) {
+    width: 200px;
+  }
+
+  &__th:nth-child(4),
+  &__cell:nth-child(4) {
+    width: 178px;
+  }
+
+  &__th:nth-child(5),
+  &__cell:nth-child(5) {
+    width: 168px;
+  }
+
+  &__th:nth-child(6),
+  &__cell:nth-child(6) {
+    width: 110px;
+  }
+
+  &__th:nth-child(7),
+  &__cell:nth-child(7) {
+    width: 44px;
+  }
+
+  &__menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    background-color: rgba(0, 0, 0, 0.28);
+    border: 0;
+    cursor: default;
+  }
+
+  &__action-btn {
+    position: relative;
+    z-index: 25;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: $text-body;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      color: $text-heading;
+    }
+  }
+
+  &__action-menu {
+    position: fixed;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+    min-height: 130px;
+    padding: 16px 0;
+    text-align: left;
+    background-color: $white;
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    border-radius: $card-border-radius;
+    box-shadow: $card-shadow;
+  }
+
+  &__action-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 36px;
+    padding: 0 20px;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: 500;
+    line-height: 1;
+    color: $text-body;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+
+    &:hover {
+      color: $text-heading;
+      background-color: rgba(33, 63, 125, 0.04);
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(57, 205, 204, 0.45);
+      outline-offset: -2px;
+    }
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: $text-heading;
+    }
+  }
+
+  &__filter-panel {
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 270px;
+    min-height: 600px;
+    padding: 30px 20px;
+    background-color: $white;
+    border: 1px solid rgba(84, 95, 125, 0.14);
+    border-radius: $card-border-radius;
+    box-shadow: $card-shadow;
+  }
+
+  &__filter-panel-header {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  &__filter-panel-title {
+    font-family: $font-family;
+    font-size: 18px;
+    font-weight: 600;
+    color: $text-heading;
+  }
+
+  &__filter-panel-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: $text-body;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  &__filter-backdrop {
+    display: none;
+  }
+
+  &__filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: 500;
+    line-height: 1;
+    color: $text-body;
+
+    input,
+    select {
+      width: 100%;
+      height: 40px;
+      padding: 0 18px;
+      font-family: $font-family;
+      font-size: $font-size-base;
+      font-weight: 400;
+      color: $text-body;
+      background-color: $white;
+      border: 1px solid rgba(33, 63, 125, 0.2);
+      border-radius: 8px;
+      outline: none;
+
+      &::placeholder {
+        color: rgba(84, 95, 125, 0.7);
+      }
+
+      &:focus {
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba(57, 205, 204, 0.12);
+      }
+    }
+
+    select {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, $text-body 50%),
+        linear-gradient(135deg, $text-body 50%, transparent 50%);
+      background-position:
+        calc(100% - 24px) 17px,
+        calc(100% - 18px) 17px;
+      background-size:
+        6px 6px,
+        6px 6px;
+      background-repeat: no-repeat;
+    }
+  }
+
+  @media (max-width: #{$mobile - 1px}) {
+    &__desktop {
+      display: none;
+    }
+
+    &__mobile-toolbar,
+    &__mobile-card-list {
+      display: block;
+    }
+
+    &__filter-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 199;
+      display: block;
+      background: rgba(0, 0, 0, 0.5);
+      border: 0;
+      cursor: default;
+    }
+
+    &__filter-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 200;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      padding: 24px 20px;
+      overflow-y: auto;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    &__filter-panel-header {
+      display: flex;
+      margin-bottom: 24px;
+    }
+
+    &__filter-actions {
+      margin-top: auto;
+      padding-top: 8px;
+    }
+  }
+
+  @media (min-width: $mobile) {
+    &__filter-panel-header {
+      display: none;
+    }
+  }
+
+  @media (max-width: #{$tablet - 1px}) and (min-width: $mobile) {
+    &__table {
+      min-width: 980px;
+    }
+
+    &__th,
+    &__cell {
+      padding-right: 16px;
+      padding-left: 16px;
+    }
+  }
+
+  &__filter-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  &__filter-reset,
+  &__filter-submit {
+    height: 40px;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  &__filter-reset {
+    color: $text-body;
+    background-color: $white;
+    border: 1px solid $text-body;
+  }
+
+  &__filter-submit {
+    color: $white;
+    background-color: $primary;
+    border: 1px solid $primary;
+  }
+}

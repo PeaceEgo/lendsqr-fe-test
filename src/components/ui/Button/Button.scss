@@ -1,0 +1,70 @@
+@use '../../../styles/variables' as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family-display;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-ui;
+  border-radius: $button-border-radius;
+  transition:
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+
+  &--primary {
+    color: $white;
+    background-color: $primary;
+
+    &:hover:not(:disabled) {
+      filter: brightness(0.95);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--lg {
+    height: $button-height;
+    padding: 0 24px;
+    font-size: $font-size-sm;
+  }
+
+  &--loading {
+    pointer-events: none;
+  }
+
+  &__spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba($white, 0.35);
+    border-top-color: $white;
+    border-radius: 50%;
+    animation: button-spin 0.7s linear infinite;
+  }
+
+  &__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

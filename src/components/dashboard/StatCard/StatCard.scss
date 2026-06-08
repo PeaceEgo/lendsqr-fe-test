@@ -1,0 +1,57 @@
+@use '../../../styles/variables' as *;
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 160px;
+  padding: 20px;
+  background-color: $white;
+  border: 1px solid rgba(33, 63, 125, 0.06);
+  border-radius: $card-border-radius;
+  box-shadow: $card-shadow;
+
+  @media (max-width: #{$mobile}) {
+    padding: 20px 16px;
+  }
+
+  &__icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  &__icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+
+  &__label {
+    margin-top: 20px;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+    color: $text-body;
+  }
+
+  &__value {
+    margin-top: 12px;
+    font-family: $font-family;
+    font-size: $font-size-xl;
+    font-weight: 600;
+    line-height: 1;
+    color: $text-heading;
+
+    @media (max-width: #{$mobile}) {
+      font-size: 20px;
+    }
+  }
+}

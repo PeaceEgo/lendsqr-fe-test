@@ -1,0 +1,33 @@
+@use '../../../styles/variables' as *;
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  font-family: $font-family;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 30px;
+  white-space: nowrap;
+
+  &--active {
+    color: $status-active-text;
+    background-color: $status-active-bg;
+  }
+
+  &--inactive {
+    color: $status-inactive-text;
+    background-color: $status-inactive-bg;
+  }
+
+  &--pending {
+    color: $status-pending-text;
+    background-color: $status-pending-bg;
+  }
+
+  &--blacklisted {
+    color: $status-blacklisted-text;
+    background-color: $status-blacklisted-bg;
+  }
+}
