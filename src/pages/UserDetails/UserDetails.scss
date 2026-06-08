@@ -119,7 +119,9 @@
   &__summary-top {
     display: flex;
     align-items: center;
+    gap: 30px;
     height: 100px;
+    max-width: 880px;
     min-width: 0;
 
     @media (max-width: #{$tablet - 1px}) {
@@ -127,6 +129,7 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 0;
+      max-width: none;
     }
 
     @media (max-width: #{$mobile - 1px}) {
@@ -138,7 +141,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    width: 300px;
+    max-width: 320px;
     min-width: 0;
     flex-shrink: 0;
 
@@ -156,6 +159,13 @@
     background-color: rgba(33, 63, 125, 0.16);
     border-radius: 50%;
     object-fit: cover;
+
+    &--placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(33, 63, 125, 0.45);
+    }
   }
 
   &__name {

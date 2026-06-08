@@ -68,32 +68,40 @@ body:has(.login) {
     flex-direction: column;
     height: 100vh;
     min-height: 100vh;
+    padding: 48px;
     background-color: $bg-login;
     overflow: hidden;
 
     @media (max-width: #{$tablet - 1px}) {
       height: auto;
       min-height: auto;
+      padding: 40px;
     }
 
     @media (max-width: #{$mobile - 1px}) {
       flex: 0 0 auto;
       height: auto;
       min-height: 0;
+      padding: 24px;
       background-color: $white;
     }
   }
 
   &__logo {
+    position: static;
     flex-shrink: 0;
-    padding: 106px 0 0 48px;
+    width: fit-content;
+    // Figma: logo at top 106px / left 97px. Column already pads 48px,
+    // so offset the remainder here. margin-bottom: auto centers the illustration.
+    margin: 58px 0 auto 49px;
+    padding: 0;
 
     @media (max-width: #{$tablet - 1px}) {
-      padding: 64px 0 0 40px;
+      margin: 24px 0 auto 24px;
     }
 
     @media (max-width: #{$mobile - 1px}) {
-      padding: 24px 0 16px 24px;
+      margin: 0;
     }
   }
 
@@ -113,11 +121,10 @@ body:has(.login) {
     align-items: center;
     justify-content: center;
     min-height: 0;
-    padding: 40px 48px;
 
     @media (max-width: #{$tablet - 1px}) {
       flex: none;
-      padding: 24px 40px 40px;
+      padding-top: 24px;
     }
 
     @media (max-width: #{$mobile - 1px}) {

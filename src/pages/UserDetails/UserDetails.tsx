@@ -20,6 +20,51 @@ const tabs = [
 
 type Tab = (typeof tabs)[number]
 
+function PersonIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="44"
+      height="44"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M12 12.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM4.5 20.5a7.5 7.5 0 0 1 15 0"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function UserAvatar({ src, name }: { src?: string; name: string }) {
+  const [hasError, setHasError] = useState(false)
+
+  if (!src || hasError) {
+    return (
+      <div
+        className="user-details__avatar user-details__avatar--placeholder"
+        role="img"
+        aria-label={name}
+      >
+        <PersonIcon />
+      </div>
+    )
+  }
+
+  return (
+    <img
+      className="user-details__avatar"
+      src={src}
+      alt={name}
+      onError={() => setHasError(true)}
+    />
+  )
+}
+
 function TierStars({ tier }: { tier: number }) {
   return (
     <div className="user-details__tier">
@@ -132,11 +177,7 @@ export function UserDetails() {
       <div className="user-details__summary-card">
         <div className="user-details__summary-top">
           <div className="user-details__identity">
-            <img
-              className="user-details__avatar"
-              src={user.avatar}
-              alt={user.full_name}
-            />
+            <UserAvatar src={user.avatar} name={user.full_name} />
             <div>
               <p className="user-details__name">{user.full_name}</p>
               <p className="user-details__id">{user.id}</p>

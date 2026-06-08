@@ -230,7 +230,14 @@
 
   &__th:nth-child(6),
   &__cell:nth-child(6) {
-    width: 110px;
+    min-width: 120px;
+    width: 130px;
+  }
+
+  &__cell[data-col='status'] {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: nowrap;
   }
 
   &__th:nth-child(7),
