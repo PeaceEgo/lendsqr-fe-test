@@ -1,0 +1,44 @@
+@use '../../styles/variables' as *;
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+
+  &__welcome {
+    padding: 24px 30px;
+    background-color: $white;
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    border-radius: $card-border-radius;
+    box-shadow: $card-shadow;
+  }
+
+  &__welcome-text {
+    font-family: $font-family;
+    font-size: $font-size-xl;
+    font-weight: 500;
+    line-height: 1;
+    color: $text-heading;
+    letter-spacing: $letter-spacing-heading;
+  }
+
+  &__stats {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 40px;
+
+    @media (min-width: #{$tablet + 1px}) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @media (min-width: #{$mobile + 1px}) and (max-width: #{$tablet}) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: #{$mobile}) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+  }
+}
