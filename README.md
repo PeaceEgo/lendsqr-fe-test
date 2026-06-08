@@ -2,6 +2,12 @@
 
 A React + TypeScript admin console built from the Lendsqr Figma designs. Includes authentication, a paginated Users table backed by 500 mock records, and a User Details page with localStorage caching.
 
+## Links
+
+- **Live Demo**: https://peace-nnorom-lendsqr-fe-test.vercel.app
+- **Repository**: https://github.com/PeaceEgo/lendsqr-fe-test
+
+
 ## Prerequisites
 
 - Node.js 20+
