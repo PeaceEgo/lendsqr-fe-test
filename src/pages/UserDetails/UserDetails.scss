@@ -1,0 +1,406 @@
+@use '../../styles/variables' as *;
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 1037px;
+  min-width: 0;
+  width: 100%;
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: $font-family;
+    font-size: $font-size-lg;
+    font-weight: 400;
+    line-height: 1;
+    color: $text-body;
+    text-decoration: none;
+
+    &:hover {
+      color: $text-heading;
+    }
+  }
+
+  &__back-icon {
+    flex-shrink: 0;
+    display: block;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    @media (max-width: #{$tablet - 1px}) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+  }
+
+  &__title {
+    font-family: $font-family;
+    font-size: $font-size-page-title;
+    font-weight: 500;
+    line-height: 1;
+    color: $text-heading;
+    letter-spacing: $letter-spacing-heading;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      width: 100%;
+      gap: 12px;
+    }
+  }
+
+  &__action {
+    width: 170px;
+    height: 40px;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    letter-spacing: $letter-spacing-ui;
+    text-transform: uppercase;
+    background-color: $white;
+    border-radius: $button-border-radius;
+    cursor: pointer;
+
+    &--blacklist {
+      color: $status-blacklisted-text;
+      border: 1px solid $status-blacklisted-text;
+    }
+
+    &--activate {
+      color: $primary;
+      border: 1px solid $primary;
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  &__summary-card,
+  &__content-card {
+    background-color: $white;
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    border-radius: $card-border-radius;
+    box-shadow: $card-shadow;
+  }
+
+  &__summary-card {
+    min-height: 210px;
+    padding: 30px 30px 0;
+
+    @media (max-width: #{$tablet - 1px}) {
+      padding: 24px 20px 0;
+    }
+
+    @media (max-width: #{$mobile}) {
+      text-align: center;
+    }
+  }
+
+  &__summary-top {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    min-width: 0;
+
+    @media (max-width: #{$tablet - 1px}) {
+      height: auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      justify-items: center;
+    }
+  }
+
+  &__identity {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 300px;
+    min-width: 0;
+    flex-shrink: 0;
+
+    @media (max-width: #{$mobile - 1px}) {
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+    }
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(33, 63, 125, 0.16);
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__name {
+    font-family: $font-family;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1;
+    color: $text-heading;
+  }
+
+  &__id {
+    margin-top: 8px;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: 400;
+    color: $text-body;
+  }
+
+  &__meta-label {
+    margin-bottom: 8px;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $text-body;
+  }
+
+  &__tier,
+  &__account {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 80px;
+    border-left: 1px solid rgba(84, 95, 125, 0.2);
+
+    @media (max-width: #{$tablet - 1px}) {
+      width: 100%;
+      min-height: 0;
+      margin-top: 20px;
+      padding-top: 20px;
+      padding-left: 0;
+      border-top: 1px solid rgba(33, 63, 125, 0.1);
+      border-left: 0;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      align-items: center;
+    }
+  }
+
+  &__tier {
+    width: 138px;
+    padding-left: 30px;
+    flex-shrink: 0;
+  }
+
+  &__stars {
+    display: flex;
+    gap: 5px;
+    line-height: 1;
+  }
+
+  &__star {
+    font-size: 17px;
+    color: #e9b200;
+
+    &--filled {
+      color: #e9b200;
+    }
+  }
+
+  &__account {
+    flex: 0 0 280px;
+    min-width: 210px;
+    max-width: 320px;
+    padding-left: 30px;
+
+    .user-details__meta-label {
+      margin-bottom: 12px;
+      font-size: 22px;
+      font-weight: 500;
+      color: $text-heading;
+    }
+  }
+
+  &__account-number {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $text-heading;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  &__tabs {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 80px;
+    margin: 0 -30px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media (max-width: #{$mobile}) {
+      margin: 0 -20px;
+    }
+  }
+
+  &__tab {
+    position: relative;
+    flex: 0 0 170px;
+    height: 29px;
+    padding: 0 0 8px;
+    font-family: $font-family;
+    font-size: $font-size-lg;
+    font-weight: 400;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    white-space: nowrap;
+    background: none;
+    border: 0;
+    cursor: pointer;
+
+    &--active {
+      font-weight: 400;
+      color: $primary;
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background-color: $primary;
+      }
+    }
+  }
+
+  &__content-card {
+    padding: 30px 30px 0;
+
+    @media (max-width: #{$tablet - 1px}) {
+      padding: 24px 20px 0;
+    }
+  }
+
+  &__sections {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  &__section-title {
+    margin-bottom: 30px;
+    font-family: $font-family;
+    font-size: $font-size-lg;
+    font-weight: 500;
+    color: $text-heading;
+  }
+
+  &__section {
+    padding-bottom: 28px;
+
+    & + & {
+      padding-top: 28px;
+      border-top: 1px solid rgba(33, 63, 125, 0.1);
+    }
+  }
+
+  &__fields {
+    display: grid;
+    gap: 30px 48px;
+
+    &--cols-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    &--cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    &--cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    &--guarantor-row {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(33, 63, 125, 0.1);
+    }
+
+    @media (max-width: #{$tablet - 1px}) {
+      &--cols-5,
+      &--cols-4 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      &--cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: #{$mobile}) {
+      &--cols-5,
+      &--cols-4,
+      &--cols-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px 12px;
+      }
+    }
+  }
+
+  &__label {
+    margin-bottom: 10px;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: $text-body;
+
+    @media (max-width: #{$mobile}) {
+      font-size: 10px;
+    }
+  }
+
+  &__value {
+    font-family: $font-family;
+    font-size: $font-size-lg;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0;
+    color: $text-body;
+    min-width: 0;
+    word-break: break-word;
+    overflow-wrap: break-word;
+
+    @media (max-width: #{$mobile}) {
+      font-size: $font-size-base;
+    }
+  }
+}
