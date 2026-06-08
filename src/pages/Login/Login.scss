@@ -1,0 +1,261 @@
+@use '../../styles/variables' as *;
+
+html:has(.login),
+body:has(.login) {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: $bg-login;
+
+  @media (max-width: #{$tablet - 1px}) {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  @media (max-width: #{$mobile - 1px}) {
+    background-color: $white;
+  }
+}
+
+#root:has(.login) {
+  height: 100vh;
+  min-height: 100vh;
+  background-color: $bg-login;
+
+  @media (max-width: #{$tablet - 1px}) {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  @media (max-width: #{$mobile - 1px}) {
+    background-color: $white;
+  }
+}
+
+.login {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: 1fr;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: $bg-login;
+
+  @media (max-width: #{$tablet - 1px}) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  @media (max-width: #{$mobile - 1px}) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+    background-color: $white;
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 100vh;
+    background-color: $bg-login;
+    overflow: hidden;
+
+    @media (max-width: #{$tablet - 1px}) {
+      height: auto;
+      min-height: auto;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      flex: 0 0 auto;
+      height: auto;
+      min-height: 0;
+      background-color: $white;
+    }
+  }
+
+  &__logo {
+    flex-shrink: 0;
+    padding: 106px 0 0 48px;
+
+    @media (max-width: #{$tablet - 1px}) {
+      padding: 64px 0 0 40px;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      padding: 24px 0 16px 24px;
+    }
+  }
+
+  &__logo-img {
+    display: block;
+    width: 173.76px;
+    height: auto;
+
+    @media (max-width: #{$mobile - 1px}) {
+      mix-blend-mode: multiply;
+    }
+  }
+
+  &__illustration {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    padding: 40px 48px;
+
+    @media (max-width: #{$tablet - 1px}) {
+      flex: none;
+      padding: 24px 40px 40px;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      display: none;
+    }
+  }
+
+  &__illustration-img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .left-column .login__illustration-img {
+    mix-blend-mode: multiply;
+  }
+
+  &__form-panel,
+  .right-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    min-height: 100vh;
+    padding: 60px 52px;
+    background-color: $white;
+
+    @media (max-width: #{$tablet - 1px}) {
+      align-items: flex-start;
+      justify-content: flex-start;
+      height: auto;
+      min-height: auto;
+      padding: 48px 40px 80px;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      flex: 1 0 auto;
+      padding: 40px 24px 48px;
+    }
+  }
+
+  &__form {
+    width: 100%;
+    max-width: 447px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__heading {
+    margin-bottom: 8px;
+    font-family: $font-family-display;
+    font-size: $font-size-xxl;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: $letter-spacing-heading;
+    color: $text-heading;
+  }
+
+  &__subheading {
+    margin-bottom: 60px;
+    font-family: $font-family-display;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: $text-body;
+
+    @media (max-width: #{$mobile - 1px}) {
+      margin-bottom: 32px;
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__toggle-password {
+    padding: 4px;
+    font-family: $font-family-display;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: $letter-spacing-ui;
+    color: $primary;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $primary;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  &__forgot {
+    align-self: flex-start;
+    margin-top: 16px;
+    padding: 4px 0;
+    font-family: $font-family-display;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: $letter-spacing-ui;
+    color: $primary;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $primary;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  &__form-error {
+    margin-top: 16px;
+    font-family: $font-family-display;
+    font-size: $font-size-sm;
+    color: $status-blacklisted-text;
+    text-align: center;
+  }
+
+  &__submit {
+    margin-top: 30px;
+  }
+}
