@@ -1,0 +1,25 @@
+@use '../../../styles/variables' as *;
+
+.dashboard-layout {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: $bg-page;
+
+  &__main {
+    margin-top: $header-height;
+    margin-left: $sidebar-width;
+    min-width: 0;
+    min-height: calc(100vh - #{$header-height});
+    padding: $content-padding $layout-padding-x $content-padding $content-padding;
+    background-color: $bg-page;
+
+    @media (max-width: #{$tablet - 1px}) {
+      margin-left: 0;
+      padding: 32px 24px 40px;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      padding: 24px 16px 40px;
+    }
+  }
+}

@@ -1,0 +1,297 @@
+@use '../../../styles/variables' as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: $header-height;
+  padding: 0 $layout-padding-x;
+  background-color: $white;
+  box-shadow: 3px 0 20px rgba(0, 0, 0, 0.04);
+
+  @media (max-width: #{$tablet - 1px}) {
+    gap: 16px;
+  }
+
+  @media (max-width: #{$mobile - 1px}) {
+    gap: 8px;
+    padding: 0 16px;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: $sidebar-width;
+
+    @media (max-width: #{$tablet - 1px}) {
+      width: auto;
+      gap: 16px;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      gap: 12px;
+    }
+  }
+
+  &__menu-btn {
+    display: none;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: $text-heading;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    @media (max-width: #{$tablet - 1px}) {
+      display: flex;
+      width: 44px;
+      height: 44px;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      width: 44px;
+      height: 44px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $primary;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  }
+
+  &__menu-icon {
+    width: 24px;
+    height: 24px;
+
+    @media (max-width: #{$tablet - 1px}) {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  &__logo-img {
+    display: block;
+    width: 144px;
+    height: auto;
+
+    @media (max-width: #{$mobile - 1px}) {
+      width: 104px;
+    }
+  }
+
+  &__center {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    min-width: 0;
+    padding-left: $content-padding - $layout-padding-x;
+
+    @media (max-width: #{$tablet - 1px}) {
+      padding-left: 0;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      flex: 1;
+      justify-content: flex-end;
+    }
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    max-width: 100%;
+    height: 40px;
+
+    @media (max-width: #{$tablet - 1px}) {
+      width: 100%;
+      max-width: 280px;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      width: auto;
+      flex-shrink: 0;
+    }
+  }
+
+  &__search-input {
+    flex: 1;
+    min-width: 0;
+    width: 344px;
+    height: 40px;
+    padding-left: 20px;
+    font-family: $font-family-display;
+    font-size: $font-size-sm;
+    color: $text-heading;
+    background-color: $white;
+    border: 1px solid rgba(33, 63, 125, 0.15);
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+
+    &::placeholder {
+      color: rgba($text-body, 0.6);
+    }
+
+    &:focus {
+      border-color: $primary;
+      box-shadow: 0 0 0 3px rgba(57, 205, 204, 0.12);
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      display: none;
+    }
+  }
+
+  &__search-btn {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 40px;
+    color: $white;
+    background-color: $primary;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(0.95);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $primary-dark;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+  }
+
+  &__right {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: $header-actions-gap;
+
+    @media (max-width: #{$tablet - 1px}) {
+      gap: 20px;
+    }
+
+    @media (max-width: #{$mobile - 1px}) {
+      gap: 12px;
+    }
+  }
+
+  &__docs {
+    font-family: $font-family-display;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $text-heading;
+    text-decoration: underline;
+    white-space: nowrap;
+
+    &:hover {
+      color: $primary;
+    }
+
+    @media (max-width: #{$tablet - 1px}) {
+      display: none;
+    }
+  }
+
+  &__bell-btn {
+    position: relative;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover .header__bell-icon {
+      filter: brightness(0.85);
+    }
+  }
+
+  &__bell-icon {
+    position: absolute;
+    top: 1.73px;
+    left: 3.16px;
+    display: block;
+    width: 19.67px;
+    height: 22.74px;
+    object-fit: contain;
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+
+    @media (max-width: #{$mobile - 1px}) {
+      gap: 0;
+    }
+    font-family: $font-family-display;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $text-heading;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    @media (max-width: #{$mobile - 1px}) {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &__profile-name {
+    @media (max-width: #{$tablet - 1px}) {
+      display: none;
+    }
+  }
+
+  &__caret {
+    flex-shrink: 0;
+    color: currentColor;
+
+    @media (max-width: #{$tablet - 1px}) {
+      display: none;
+    }
+  }
+}
