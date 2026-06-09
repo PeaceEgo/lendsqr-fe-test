@@ -3,9 +3,10 @@ import { Link, useParams } from 'react-router-dom'
 import { DetailsSkeleton } from '../../components/ui/DetailsSkeleton'
 import { EmptyState } from '../../components/ui/EmptyState'
 import { ErrorState } from '../../components/ui/ErrorState'
+import { StatusBadge } from '../../components/ui/StatusBadge'
 import { useUser } from '../../hooks/useUser'
 import { useUsersDataStore } from '../../store/useUsersDataStore'
-import type { User } from '../../types/user.types'
+import type { User, UserStatus } from '../../types/user.types'
 import { GeneralDetailsContent } from './UserDetailsSections'
 import './UserDetails.scss'
 
@@ -102,14 +103,39 @@ function getAccountMeta(user: User) {
 export function UserDetails() {
   const { id = '' } = useParams<{ id: string }>()
   const { user, loading, error, retry } = useUser(id)
+  const statusOverrides = useUsersDataStore((state) => state.statusOverrides)
   const updateUserStatus = useUsersDataStore((state) => state.updateUserStatus)
   const [activeTab, setActiveTab] = useState<Tab>('General Details')
+  const [actionMessage, setActionMessage] = useState<string | null>(null)
 
   useEffect(() => {
     document.title = user
       ? `${user.full_name} | Lendsqr`
       : 'User Details | Lendsqr'
   }, [user])
+
+  useEffect(() => {
+    if (!actionMessage) {
+      return undefined
+    }
+
+    const timer = window.setTimeout(() => {
+      setActionMessage(null)
+    }, 3000)
+
+    return () => {
+      window.clearTimeout(timer)
+    }
+  }, [actionMessage])
+
+  const handleStatusChange = (status: UserStatus, message: string) => {
+    if (!user) {
+      return
+    }
+
+    updateUserStatus(user.id, status)
+    setActionMessage(message)
+  }
 
   if (loading && !user) {
     return (
@@ -139,6 +165,9 @@ export function UserDetails() {
   }
 
   const accountMeta = getAccountMeta(user)
+  const currentStatus = statusOverrides[user.id] ?? user.status
+  const isBlacklisted = currentStatus === 'Blacklisted'
+  const isActive = currentStatus === 'Active'
 
   return (
     <div className="user-details">
@@ -160,19 +189,33 @@ export function UserDetails() {
           <button
             type="button"
             className="user-details__action user-details__action--blacklist"
-            onClick={() => updateUserStatus(user.id, 'Blacklisted')}
+            disabled={isBlacklisted}
+            aria-disabled={isBlacklisted}
+            onClick={() =>
+              handleStatusChange('Blacklisted', 'User has been blacklisted.')
+            }
           >
             Blacklist User
           </button>
           <button
             type="button"
             className="user-details__action user-details__action--activate"
-            onClick={() => updateUserStatus(user.id, 'Active')}
+            disabled={isActive}
+            aria-disabled={isActive}
+            onClick={() =>
+              handleStatusChange('Active', 'User has been activated.')
+            }
           >
             Activate User
           </button>
         </div>
       </div>
+
+      {actionMessage && (
+        <p className="user-details__action-feedback" role="status">
+          {actionMessage}
+        </p>
+      )}
 
       <div className="user-details__summary-card">
         <div className="user-details__summary-top">
@@ -181,6 +224,7 @@ export function UserDetails() {
             <div>
               <p className="user-details__name">{user.full_name}</p>
               <p className="user-details__id">{user.id}</p>
+              <StatusBadge status={currentStatus} />
             </div>
           </div>
 
@@ -213,7 +257,7 @@ export function UserDetails() {
 
       <div className="user-details__content-card">
         {activeTab === 'General Details' ? (
-          <GeneralDetailsContent user={user} />
+          <GeneralDetailsContent user={{ ...user, status: currentStatus }} />
         ) : (
           <EmptyState
             title={`No ${activeTab.toLowerCase()} yet`}

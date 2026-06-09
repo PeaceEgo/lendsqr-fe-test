@@ -89,10 +89,27 @@
       border: 1px solid $primary;
     }
 
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
     @media (max-width: 600px) {
       width: 100%;
       justify-content: center;
     }
+  }
+
+  &__action-feedback {
+    margin: -18px 0 0;
+    padding: 12px 16px;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: 500;
+    color: $text-heading;
+    background-color: rgba(57, 205, 204, 0.12);
+    border: 1px solid rgba(57, 205, 204, 0.35);
+    border-radius: $card-border-radius;
   }
 
   &__summary-card,
@@ -182,6 +199,10 @@
     font-size: $font-size-base;
     font-weight: 400;
     color: $text-body;
+  }
+
+  &__identity .status-badge {
+    margin-top: 10px;
   }
 
   &__meta-label {

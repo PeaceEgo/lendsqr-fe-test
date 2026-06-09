@@ -24,10 +24,9 @@ export function useUser(id: string) {
       return
     }
 
+    const overrides = useUsersDataStore.getState().statusOverrides
     const cached = getItem<User>(storageKeys.userDetails(id))
-    const cachedUser = cached
-      ? applyStatusOverride(cached, statusOverrides)
-      : null
+    const cachedUser = cached ? applyStatusOverride(cached, overrides) : null
 
     setState({
       user: cachedUser,
@@ -37,7 +36,10 @@ export function useUser(id: string) {
 
     try {
       const user = await fetchUserById(id)
-      const mergedUser = applyStatusOverride(user, statusOverrides)
+      const mergedUser = applyStatusOverride(
+        user,
+        useUsersDataStore.getState().statusOverrides,
+      )
       setItem(storageKeys.userDetails(id), mergedUser)
       setState({ user: mergedUser, loading: false, error: null })
     } catch (error) {
@@ -52,7 +54,18 @@ export function useUser(id: string) {
               : 'Failed to fetch user',
       })
     }
-  }, [id, statusOverrides])
+  }, [id])
+
+  useEffect(() => {
+    setState((prev) => {
+      if (!prev.user) {
+        return prev
+      }
+
+      const nextUser = applyStatusOverride(prev.user, statusOverrides)
+      return nextUser === prev.user ? prev : { ...prev, user: nextUser }
+    })
+  }, [statusOverrides])
 
   useEffect(() => {
     void load()
